@@ -13,32 +13,43 @@ Version: 1.0
 function wl_bootstrap() {
 
     if (!is_user_logged_in() && $token = $_GET['token'] ?? false) {
-        $request = new WP_Http;
-        $result = $request->request( 'http://uc.ricky.zone/api/user', [
-            'method' => 'POST',
-            'headers' => [
-                'Accept' => "application/json",
-                'Authorization' => 'Bearer '.$token
-            ]
-        ]);
 
-        if(isset($result->errors['http_request_failed']))
+        global $wpdb;
+
+        $token_user = $wpdb->get_row($wpdb->prepare( "SELECT `tokenable_id` FROM `wp_personal_access_tokens` WHERE `token` = %s", $token));
+        if(! is_object($token_user))
         {
-            throw new Error($result->errors['http_request_failed'][0]);
+            return;
         }
-
-        $result = json_decode($result['body']);
-
-        $user_login = $result->name; // 用户名
-
-        // 获取用户 id
-        $user = get_userdatabylogin($user_login);
-        $user_id = $user->ID;
-
+        $user = get_user_by('ID', $token_user->tokenable_id);
         // 登录
-        wp_set_current_user($user_id, $user_login);
-        wp_set_auth_cookie($user_id,true);
-        do_action('wp_login', $user_login);
+        wp_set_current_user($user->ID, $user->user_login);
+        wp_set_auth_cookie($user->ID,true);
+        do_action('wp_login', $user->user_login);
+//        $request = new WP_Http;
+//        $result = $request->request( 'http://usercenter.test/api/user', [
+//            'method' => 'POST',
+//            'headers' => [
+//                'Accept' => "application/json",
+//                'Authorization' => 'Bearer '.$token
+//            ]
+//        ]);
+//        var_dump($result['body']);
+//        die;
+//        if(isset($result->errors['http_request_failed']))
+//        {
+//            throw new Error($result->errors['http_request_failed'][0]);
+//        }
+
+//        $result = json_decode($result['body']);
+//
+//        $user_login = $result->name; // 用户名
+//
+//        // 获取用户 id
+//        $user = get_userdatabylogin($user_login);
+//        $user_id = $user->ID;
+
+
     }
 //    埋点备用，可以调用 usercenter 站点的方法和路由。
 //    define('LARAVEL_PATH', 'C:\laragon\www\usercenter');

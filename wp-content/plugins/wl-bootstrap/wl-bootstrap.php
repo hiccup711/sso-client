@@ -11,10 +11,10 @@ Version: 1.0
 */
 
 function wl_bootstrap() {
-    if (!is_user_logged_in() && $token = $_GET['token']) {
 
+    if (!is_user_logged_in() && $token = $_GET['token'] ?? false) {
         $request = new WP_Http;
-        $result = $request->request( 'http://usercenter.test/api/user', [
+        $result = $request->request( 'http://uc.ricky.zone/api/user', [
             'method' => 'POST',
             'headers' => [
                 'Accept' => "application/json",
@@ -22,9 +22,14 @@ function wl_bootstrap() {
             ]
         ]);
 
+        if(isset($result->errors['http_request_failed']))
+        {
+            throw new Error($result->errors['http_request_failed'][0]);
+        }
+
         $result = json_decode($result['body']);
 
-        $user_login = $result->name; // 用户名是 example，自行修改
+        $user_login = $result->name; // 用户名
 
         // 获取用户 id
         $user = get_userdatabylogin($user_login);
@@ -35,7 +40,7 @@ function wl_bootstrap() {
         wp_set_auth_cookie($user_id,true);
         do_action('wp_login', $user_login);
     }
-//    埋点备用，可以调用 usercenter 方法和路由。
+//    埋点备用，可以调用 usercenter 站点的方法和路由。
 //    define('LARAVEL_PATH', 'C:\laragon\www\usercenter');
 //
 //    if (!defined('LARAVEL_PATH')) {

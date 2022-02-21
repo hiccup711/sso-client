@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6b85f1c6-a456-477f-bb13-d6d597300375" name="变更" comment="" />
+    <list default="true" id="6b85f1c6-a456-477f-bb13-d6d597300375" name="变更" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -9,6 +12,9 @@
   </component>
   <component name="ComposerSettings">
     <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -27,6 +33,7 @@
   </component>
   <component name="PhpWebServerValidation" path_to_validation_script="C:\laragon\www\wordpress" selected_validation_type="LOCAL" web_path_to_validation_script="http://wordpress.test:80" />
   <component name="ProjectId" id="25BuPoMbSmAQNqfu695M1Ebi6iY" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -72,7 +79,7 @@
       <workItem from="1645052973955" duration="1914000" />
       <workItem from="1645102217205" duration="1123000" />
       <workItem from="1645139498851" duration="1870000" />
-      <workItem from="1645364133542" duration="11061000" />
+      <workItem from="1645364133542" duration="12213000" />
     </task>
     <servers />
   </component>

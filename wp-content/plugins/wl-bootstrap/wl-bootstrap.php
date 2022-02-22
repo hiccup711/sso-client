@@ -22,7 +22,7 @@ function wl_bootstrap() {
         {
             return;
         }
-        $user = get_user_by('ID', $token_user->tokenable_id);
+        $user = get_user_by('ID', $token_user->wp_user_id);
         // 登录
         wp_set_current_user($user->ID, $user->user_login);
         wp_set_auth_cookie($user->ID,true);

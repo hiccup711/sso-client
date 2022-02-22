@@ -16,7 +16,8 @@ function wl_bootstrap() {
 
         global $wpdb;
 
-        $token_user = $wpdb->get_row($wpdb->prepare( "SELECT `tokenable_id` FROM `wp_personal_access_tokens` WHERE `token` = %s", $token));
+        $token_user = $wpdb->get_row($wpdb->prepare("SELECT u.wp_user_id FROM `wp_user_center` u LEFT JOIN(SELECT * FROM `wp_personal_access_tokens` t) t ON t.tokenable_id = u.id WHERE t.token = %s", $token));
+        
         if(! is_object($token_user))
         {
             return;
